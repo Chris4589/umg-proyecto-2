@@ -7,5 +7,6 @@
 
 ## Patrones Utilizados:
 
-- Única responsabilidad
+- Única Responsabilidad
 - Prototype
+- Fachada
