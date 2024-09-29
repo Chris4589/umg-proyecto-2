@@ -11,7 +11,7 @@ public interface IOrderService {
     CreateOrderDto createOrder(CreateOrderDto order);
     void deleteOrder(Long id);
     List<Order> getOrders();
-    Order updateOrderStatus(Order order);
+    Order updateOrderStatus(Long orderId);
 
     OrderResponseDto getOrderById(Long orderId);
 }

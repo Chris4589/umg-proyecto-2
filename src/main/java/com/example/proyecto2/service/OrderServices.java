@@ -63,11 +63,15 @@ public class OrderServices implements IOrderService {
     }
 
     @Override
-    public Order updateOrderStatus(Order order) {
-        this.orderRepository.findById(order.getOrderId())
+    public Order updateOrderStatus(Long orderId) {
+        var order = this.orderRepository.findById(orderId)
                 .orElseThrow(() -> new NoContentException("Order not found"));
 
-        return this.orderRepository.updateOrderStatus(order.getStatus(), order.getOrderId());
+        order.setStatus("DELIVERED");
+
+        this.orderRepository.updateOrderStatus(order.getStatus(), order.getOrderId());
+        
+        return order;
     }
 
     @Override

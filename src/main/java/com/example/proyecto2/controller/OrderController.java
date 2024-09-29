@@ -1,5 +1,6 @@
 package com.example.proyecto2.controller;
 
+import com.example.proyecto2.domain.Order;
 import com.example.proyecto2.dto.CreateOrderDto;
 import com.example.proyecto2.dto.OrderResponseDto;
 import com.example.proyecto2.service.OrderServices;
@@ -21,5 +22,10 @@ public class OrderController {
     @GetMapping("/{orderId}")
     public ResponseEntity<OrderResponseDto> getOrder(@PathVariable Long orderId) {
         return ResponseEntity.ok(this.orderServices.getOrderById(orderId));
+    }
+
+    @PutMapping("/{orderId}")
+    public ResponseEntity<Order> updateOrderStatus(@PathVariable Long orderId) {
+        return ResponseEntity.ok(this.orderServices.updateOrderStatus(orderId));
     }
 }
