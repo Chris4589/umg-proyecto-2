@@ -46,5 +46,10 @@ public class Client {
         }
     }
 
+    public void validateClientId() {
+        if (this.clientId <= 0) {
+            throw new BadRequestException("The client id is required");
+        }
+    }
     // Getters and setters were generated using Lombok with the @Getter and @Setter annotations
 }

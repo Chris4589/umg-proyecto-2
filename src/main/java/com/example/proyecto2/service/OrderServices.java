@@ -1,9 +1,11 @@
 package com.example.proyecto2.service;
 
 import com.example.proyecto2.domain.Order;
+import com.example.proyecto2.domain.Product;
 import com.example.proyecto2.domain.ProductOrder;
 import com.example.proyecto2.domain.ProductOrderPK;
 import com.example.proyecto2.dto.CreateOrderDto;
+import com.example.proyecto2.dto.OrderResponseDto;
 import com.example.proyecto2.exception.NoContentException;
 import com.example.proyecto2.interfaces.IOrderService;
 import com.example.proyecto2.repository.ClientRepository;
@@ -14,6 +16,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -65,5 +68,35 @@ public class OrderServices implements IOrderService {
                 .orElseThrow(() -> new NoContentException("Order not found"));
 
         return this.orderRepository.updateOrderStatus(order.getStatus(), order.getOrderId());
+    }
+
+    @Override
+    public OrderResponseDto getOrderById(Long orderId) {
+        var order = this.orderRepository.findById(orderId).orElse(null);
+
+        if (order == null) {
+            throw new NoContentException("Order not found");
+        }
+        var tmp = this.productOrderRepository.findProductsByOrderId(orderId);
+
+        var products = new ArrayList<Product>();
+        for (Object[] row : tmp) {
+            Long productId = ((Number) row[0]).longValue();
+            String name = (String) row[1];
+            Double price = (Double) row[2];
+
+            var product = new Product();
+            product.setProductId(productId);
+            product.setName(name);
+            product.setPrice(price);
+
+            products.add(product);
+        }
+
+        if (products.isEmpty()) {
+            throw new NoContentException("No products found for this order");
+        }
+
+        return new OrderResponseDto(order, products);
     }
 }

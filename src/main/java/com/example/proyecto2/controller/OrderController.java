@@ -6,10 +6,7 @@ import com.example.proyecto2.service.OrderServices;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/order")
@@ -19,5 +16,10 @@ public class OrderController {
     @PostMapping("/")
     public ResponseEntity<CreateOrderDto> createOrder(@NonNull @RequestBody CreateOrderDto createOrderDto) {
         return ResponseEntity.ok(this.orderServices.createOrder(createOrderDto));
+    }
+
+    @GetMapping("/{orderId}")
+    public ResponseEntity<OrderResponseDto> getOrder(@PathVariable Long orderId) {
+        return ResponseEntity.ok(this.orderServices.getOrderById(orderId));
     }
 }

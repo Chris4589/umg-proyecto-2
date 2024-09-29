@@ -36,5 +36,46 @@ public class ClientService implements IClientService {
         return clients;
     }
 
+    @Override
+    public void deleteClient(@NonNull Long clientId) {
+        if (clientId <= 0) {
+            throw new BadRequestException("The client id is required");
+        }
+
+        var client = this.clientRepository.findById(clientId)
+                .orElse(null);
+
+        if (client == null) {
+            throw new NoContentException("The client does not exist");
+        }
+
+        this.clientRepository.deleteById(clientId);
+    }
+
+    @Override
+    public void updateClient(@NonNull Client client) {
+        client.validate();
+        client.validateClientId();
+
+        var clientToUpdate = this.clientRepository.findById(client.getClientId())
+                .orElse(null);
+
+        if (clientToUpdate == null) {
+            throw new NoContentException("The client does not exist");
+        }
+        this.clientRepository.save(client);
+    }
+
+    @Override
+    public Client getClient(@NonNull Long clientId) {
+        var client = this.clientRepository.findById(clientId)
+                .orElse(null);
+
+        if (client == null) {
+            throw new NoContentException("The client does not exist");
+        }
+        return client;
+    }
+
 
 }

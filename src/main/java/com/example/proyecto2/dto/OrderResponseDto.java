@@ -15,4 +15,12 @@ import java.util.List;
 @NoArgsConstructor
 public class OrderResponseDto extends Order {
     private List<Product> products;
+
+    public OrderResponseDto(Order order, List<Product> products) {
+        this.setOrderId(order.getOrderId());
+        this.setDate(order.getDate());
+        this.setStatus(order.getStatus());
+        this.setClientId(order.getClientId());
+        this.setProducts(products);
+    }
 }
