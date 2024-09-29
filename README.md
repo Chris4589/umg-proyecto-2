@@ -10,3 +10,8 @@
 - Única Responsabilidad
 - Prototype
 - Fachada
+
+
+Diagrama de clases
+
+![image](https://github.com/user-attachments/assets/f81975d3-b604-4f5e-903d-5bbd99c5bae0)
