@@ -10,4 +10,6 @@ public interface IProductService {
     List<Product> getProducts();
     Product createProduct(CreateProductDto product);
     Product updateProduct(CreateProductDto product);
+
+    Product getProductByName(String name);
 }

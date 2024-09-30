@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Escritorio metalico",
+    "price": 100,
+    "categories": [1]
+  },
+  {
+    "name": "Silla de oficina",
+    "price": 50,
+    "categories": [1]
+  },
+  {
+    "name": "Mesa de oficina",
+    "price": 150,
+    "categories": [1]
+  },
+  {
+    "name": "Estanteria de oficina",
+    "price": 200,
+    "categories": [1]
+  },
+  {
+    "name": "Cajonera de oficina",
+    "price": 75,
+    "categories": [1]
+  }
+]

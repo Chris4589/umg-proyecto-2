@@ -59,4 +59,8 @@ public class ProductService implements IProductService {
     public Product updateProduct(CreateProductDto product) {
         return null;
     }
+
+    public Product getProductByName(String name) {
+        return this.productRepository.findByName(name);
+    }
 }
